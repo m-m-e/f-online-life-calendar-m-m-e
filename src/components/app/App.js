@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import Editor from '../editor/Editor';
 import {Calendar} from '../calendar/Calendar';
+import {saveData} from '../../services/Helpers';
 
 
 class App extends React.Component {
@@ -13,7 +14,18 @@ class App extends React.Component {
     }
     this.updateMood = this.updateMood.bind(this);
     this.addMood = this.addMood.bind(this);
+    this.clearMood = this.clearMood.bind(this);
   }
+
+  componentDidMount(){
+    const newData = JSON.parse(localStorage.getItem('previousDays'));
+    this.setState({days: newData});
+  }
+
+  clearMood(){
+    this.setState({newMood: {}});
+  }
+
   updateMood(event){
     const current = event.currentTarget;
     this.setState(prevState => {
@@ -21,18 +33,21 @@ class App extends React.Component {
       return {newMood: mood};
     })
   }
-
+  
   addMood(event){
     this.setState(prevState => {
       const dayToAdd = {...prevState.newMood};
       const currentDays = [...prevState.days];
       currentDays.push(dayToAdd);
+      saveData('previousDays', currentDays);
       return {days: currentDays};
     })
+    this.clearMood();
   }
 
   render(){
-    const {updateMood, addMood} = this;
+    const {newMood, days} = this.state;
+    const {updateMood, addMood, clearMood} = this;
     return (
       <div className="app">
         <header className="header">
@@ -43,8 +58,13 @@ class App extends React.Component {
         </header>
         <main className="main">
           <div className="wrapper main__wrapper">
-            <Editor updateMood={updateMood} addMood={addMood}/>
-            <Calendar />
+            <Editor
+              updateMood={updateMood}
+              addMood={addMood}
+              mood={newMood}
+              clearMood={clearMood}
+            />
+            <Calendar days={days} />
           </div>
         </main>
         <footer className="footer">

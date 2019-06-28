@@ -3,7 +3,7 @@ import './editor.scss';
 
 class Editor extends Component {
   render(){
-    const {updateMood, addMood} = this.props;
+    const {updateMood, addMood, mood, clearMood} = this.props;
     return(
       <section className="editor">
         <form action="" className="editor__form">
@@ -17,6 +17,7 @@ class Editor extends Component {
               name="date"
               className="input date__input"
               onChange={updateMood}
+              value={mood.date ? mood.date : 'dd/mm/yyyy'}
             />
           </div>
           <div className="form__container">
@@ -30,6 +31,7 @@ class Editor extends Component {
                   value="good"
                   className="input mood__input"
                   onChange={updateMood}
+                  checked={mood.mood && mood.mood === 'good' ? true : false}
                 />
                 <label htmlFor="good" className="form__label mood__label">
                   :)
@@ -43,6 +45,7 @@ class Editor extends Component {
                   value="bad"
                   className="input mood__input"
                   onChange={updateMood}
+                  checked={mood.mood && mood.mood === 'bad' ? true : false}
                 />
                 <label htmlFor="bad" className="form__label mood__label">
                   :(
@@ -50,21 +53,34 @@ class Editor extends Component {
               </li>
             </ul>
           </div>
-          <div className="form__container">
-            <label htmlFor="message" className="form__label">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="2"
-              cols="33"
-              placeholder="Why was it a good day?"
-              onChange={updateMood}
-              className="input message__input"
-            />
-          </div>
+          {mood && mood.mood === 'good' &&
+            <div className="form__container">
+              <label htmlFor="message" className="form__label">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="2"
+                cols="33"
+                placeholder="Why was it a good day?"
+                onChange={updateMood}
+                className="input message__input"
+                value={mood.message}
+              />
+            </div>
+          }
           <div className="actions">
-            <button type="button" className="button button__save" onClick={addMood}>Save</button>
-            <button type="button" className="button button__cancel">Cancel</button>
+            <button
+              type="button"
+              className="button button__save"
+              onClick={addMood}>
+                Save
+            </button>
+            <button
+              type="button"
+              className="button button__cancel"
+              onClick={clearMood}>
+                Cancel
+            </button>
           </div>
         </form>
       </section>

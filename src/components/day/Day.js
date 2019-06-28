@@ -6,8 +6,19 @@ const Day = (props) => {
   return (
     <li className="day">
       <div
-      className={day === ':)' ? "smiley smiley__good" : "smiley smiley__bad" }>
-        {day}
+      className={
+        day.mood === 'good'
+        ?
+          "smiley smiley__good"
+        :
+          "smiley smiley__bad"
+      }>
+      {day.mood === 'good'
+        ?
+          ':)'
+        :
+          ':('
+      }
       </div>
     </li>
   );
