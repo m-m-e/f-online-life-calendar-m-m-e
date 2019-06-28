@@ -1,0 +1,15 @@
+@import '../../stylesheets/variables';
+
+.calendar {
+  min-height: 300px;
+
+  .add__button {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background: $color-indigo;
+    text-align: center;
+    color: $color-white;
+    font-size: $font-m;
+  }
+}

@@ -1,0 +1,8 @@
+@import '../../stylesheets/variables';
+
+.day__list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

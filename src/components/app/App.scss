@@ -1,0 +1,21 @@
+@import '../../stylesheets/_variables.scss';
+
+.app {
+  font-family: $font-main;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  
+  .wrapper {
+    margin: 25px;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .footer {
+    text-align: center;
+  }
+}

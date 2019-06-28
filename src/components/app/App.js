@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import Editor from '../editor/Editor';
 import {Calendar} from '../calendar/Calendar';
 
@@ -17,14 +17,18 @@ class App extends React.Component {
   // }
   render(){
     return (
-      <div className="App">
+      <div className="app">
         <header className="header">
-          <h1 className="title">Welcome to the life calendar!</h1>
-          <h2 className="subtitle">How was your day?</h2>
+          <div className="wrapper header__wrapper">
+            <h1 className="title">Welcome to the life calendar!</h1>
+            <h2 className="subtitle">How was your day?</h2>
+          </div>
         </header>
         <main className="main">
-          <Editor />
-          <Calendar />
+          <div className="wrapper main__wrapper">
+            <Editor />
+            <Calendar />
+          </div>
         </main>
         <footer className="footer">
           <p className="footer__text">Megan M Edwards 2019</p>

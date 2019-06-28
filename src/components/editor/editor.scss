@@ -1,0 +1,73 @@
+@import '../../stylesheets/variables';
+
+.editor {
+  min-height: 300px;
+
+  .form__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form__label {
+    margin-bottom: 10px;
+  }
+
+  .input {
+    margin-bottom: 10px;
+  }
+
+  .mood__options {
+    margin-top: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .mood__option {
+    width: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .mood__label {
+    margin: 0;
+  }
+
+  .mood__input {
+    margin: 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button {
+    font-family: $font-main;
+    padding: 10px;
+    width: 100%;
+    margin: 10px;
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &__save {
+      background: $color-indigo;
+      border: 2px solid $color-white;
+      color: $color-white;
+      text-transform: uppercase;
+    }
+
+    &__cancel {
+      background: none;
+      border: none;
+      color: $color-indigo;
+    }
+  }
+}

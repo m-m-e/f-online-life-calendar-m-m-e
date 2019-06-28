@@ -1,0 +1,25 @@
+@import '../../stylesheets/variables';
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  
+  .smiley {
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: $font-l;
+    
+    &__good {
+      background: $color-yellow;
+    }
+    &__bad {
+      background: $color-orange;
+    }
+  }
+}
