@@ -8,14 +8,31 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      newMood: {},
       days: []
     }
+    this.updateMood = this.updateMood.bind(this);
+    this.addMood = this.addMood.bind(this);
+  }
+  updateMood(event){
+    const current = event.currentTarget;
+    this.setState(prevState => {
+      const mood = {...prevState.newMood, [current.name]: current.value};
+      return {newMood: mood};
+    })
   }
 
-  // addMood(event){
+  addMood(event){
+    this.setState(prevState => {
+      const dayToAdd = {...prevState.newMood};
+      const currentDays = [...prevState.days];
+      currentDays.push(dayToAdd);
+      return {days: currentDays};
+    })
+  }
 
-  // }
   render(){
+    const {updateMood, addMood} = this;
     return (
       <div className="app">
         <header className="header">
@@ -26,7 +43,7 @@ class App extends React.Component {
         </header>
         <main className="main">
           <div className="wrapper main__wrapper">
-            <Editor />
+            <Editor updateMood={updateMood} addMood={addMood}/>
             <Calendar />
           </div>
         </main>

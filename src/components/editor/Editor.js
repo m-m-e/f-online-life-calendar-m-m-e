@@ -2,26 +2,8 @@ import React, {Component} from 'react';
 import './editor.scss';
 
 class Editor extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      newMood: {}
-    }
-    this.updateMood = this.updateMood.bind(this);
-  }
-
-  updateMood(event){
-    // const current = event.currentTarget;
-    // const newObj = {[current.id]: current.value};
-    // console.log(newObj);
-    // this.setState(prevState => {
-    //   const moodToAdd = {...prevState.newMood, newMood: newObj};
-    //   return ({newMood: moodToAdd});
-    // })
-  }
-
   render(){
-    const {updateMood} = this;
+    const {updateMood, addMood} = this.props;
     return(
       <section className="editor">
         <form action="" className="editor__form">
@@ -32,7 +14,7 @@ class Editor extends Component {
             <input 
               type="date"
               id="date"
-              name="currentDate"
+              name="date"
               className="input date__input"
               onChange={updateMood}
             />
@@ -81,7 +63,7 @@ class Editor extends Component {
             />
           </div>
           <div className="actions">
-            <button type="button" className="button button__save">Save</button>
+            <button type="button" className="button button__save" onClick={addMood}>Save</button>
             <button type="button" className="button button__cancel">Cancel</button>
           </div>
         </form>
