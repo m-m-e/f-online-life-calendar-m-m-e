@@ -3,14 +3,15 @@ import './App.scss';
 import Editor from '../editor/Editor';
 import {Calendar} from '../calendar/Calendar';
 import {saveData} from '../../services/Helpers';
-
+import {Route,Switch} from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       newMood: {},
-      days: []
+      days: [],
+      isError: false
     }
     this.updateMood = this.updateMood.bind(this);
     this.addMood = this.addMood.bind(this);
@@ -18,7 +19,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    const newData = JSON.parse(localStorage.getItem('previousDays'));
+    const newData = JSON.parse(localStorage.getItem('previousDays')) || [];
     this.setState({days: newData});
   }
 
@@ -35,18 +36,23 @@ class App extends React.Component {
   }
   
   addMood(event){
-    this.setState(prevState => {
-      const dayToAdd = {...prevState.newMood};
-      const currentDays = [...prevState.days];
-      currentDays.push(dayToAdd);
-      saveData('previousDays', currentDays);
-      return {days: currentDays};
-    })
-    this.clearMood();
+    const mood = this.state.newMood;
+      if (Object.keys(mood).length >= 2){
+      this.setState(prevState => {
+        const dayToAdd = {...prevState.newMood};
+        const currentDays = [...prevState.days];
+        currentDays.push(dayToAdd);
+        saveData('previousDays', currentDays);
+        return {days: currentDays, isError: false};
+      })
+      this.clearMood();
+    } else {
+      this.setState({isError: true});
+    }
   }
 
   render(){
-    const {newMood, days} = this.state;
+    const {newMood, days, isError} = this.state;
     const {updateMood, addMood, clearMood} = this;
     return (
       <div className="app">
@@ -58,13 +64,20 @@ class App extends React.Component {
         </header>
         <main className="main">
           <div className="wrapper main__wrapper">
-            <Editor
-              updateMood={updateMood}
-              addMood={addMood}
-              mood={newMood}
-              clearMood={clearMood}
-            />
-            <Calendar days={days} />
+            <Switch>
+              <Route exact path="/" render={ () => (
+                <Calendar days={days} />
+              )}/>
+              <Route path="/editor" render={ () => (
+                <Editor
+                updateMood={updateMood}
+                addMood={addMood}
+                mood={newMood}
+                clearMood={clearMood}
+                error={isError}
+                />
+              )}/>
+            </Switch>
           </div>
         </main>
         <footer className="footer">

@@ -5,6 +5,9 @@
   justify-content: center;
   align-items: center;
   margin: 10px;
+  &:hover{
+    cursor: default;
+  }
   
   .smiley {
     height: 60px;

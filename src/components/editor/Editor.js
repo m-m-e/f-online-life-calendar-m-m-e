@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import './editor.scss';
+import {Link} from 'react-router-dom'
 
 class Editor extends Component {
   render(){
-    const {updateMood, addMood, mood, clearMood} = this.props;
+    const {updateMood, addMood, mood, clearMood, error} = this.props;
     return(
       <section className="editor">
         <form action="" className="editor__form">
@@ -68,20 +69,43 @@ class Editor extends Component {
               />
             </div>
           }
-          <div className="actions">
-            <button
-              type="button"
-              className="button button__save"
-              onClick={addMood}>
-                Save
-            </button>
-            <button
-              type="button"
-              className="button button__cancel"
-              onClick={clearMood}>
-                Cancel
-            </button>
-          </div>
+          {mood.date && mood.mood
+            ?
+            <div className="actions">
+              <Link to="/">
+                <button
+                  type="button"
+                  className="button button__save"
+                  onClick={addMood}>
+                      Save
+                </button>
+              </Link>
+              <button
+                type="button"
+                className="button button__cancel"
+                onClick={clearMood}>
+                  <Link to="/">
+                    Cancel
+                  </Link>
+              </button>
+            </div>
+            :
+            <div className="actions">
+              <button
+                type="button"
+                className="button button__save"
+                onClick={addMood}>
+                  Save
+              </button>
+              <button
+                type="button"
+                className="button button__cancel"
+                onClick={clearMood}>
+                  Cancel
+              </button>
+            </div>
+          }
+          {error && <p className="error">Please fill in the date and your mood!</p>}
         </form>
       </section>
     );

@@ -6,6 +6,7 @@ const Day = (props) => {
   return (
     <li className="day">
       <div
+      title={day.date}
       className={
         day.mood === 'good'
         ?
