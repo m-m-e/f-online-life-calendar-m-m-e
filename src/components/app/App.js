@@ -42,6 +42,7 @@ class App extends React.Component {
   addMood(event){
     const {newMood: mood, days} = this.state;
     const previous = days.find(element => element.date === mood.date);
+    if (previous){
       if (Object.keys(mood).length >= 2 && previous.date !== mood.date){
       this.setState(prevState => {
         const dayToAdd = {...prevState.newMood};
@@ -51,8 +52,22 @@ class App extends React.Component {
         return {days: currentDays, isError: false};
       })
       this.clearMood();
+      } else {
+        this.setState({isError: true});
+      }
     } else {
-      this.setState({isError: true});
+      if (Object.keys(mood).length >= 2){
+        this.setState(prevState => {
+          const dayToAdd = {...prevState.newMood};
+          const currentDays = [...prevState.days];
+          currentDays.push(dayToAdd);
+          saveData('previousDays', currentDays);
+          return {days: currentDays, isError: false};
+        })
+        this.clearMood();
+        } else {
+          this.setState({isError: true});
+        }
     }
   }
 
