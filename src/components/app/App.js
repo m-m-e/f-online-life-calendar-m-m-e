@@ -11,11 +11,15 @@ class App extends React.Component {
     this.state = {
       newMood: {},
       days: [],
-      isError: false
+      isError: false,
+      isModalVisible: false,
+      chosenDay: {}
     }
     this.updateMood = this.updateMood.bind(this);
     this.addMood = this.addMood.bind(this);
     this.clearMood = this.clearMood.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
   componentDidMount(){
@@ -36,8 +40,9 @@ class App extends React.Component {
   }
   
   addMood(event){
-    const mood = this.state.newMood;
-      if (Object.keys(mood).length >= 2){
+    const {newMood: mood, days} = this.state;
+    const previous = days.find(element => element.date === mood.date);
+      if (Object.keys(mood).length >= 2 && previous.date !== mood.date){
       this.setState(prevState => {
         const dayToAdd = {...prevState.newMood};
         const currentDays = [...prevState.days];
@@ -51,9 +56,20 @@ class App extends React.Component {
     }
   }
 
+  showModal(event){
+    const { days } = this.state;
+    const current = event.currentTarget;
+    let chosenDayInfo = days.find(element => element.date === current.title);
+    this.setState({isModalVisible: true, chosenDay: chosenDayInfo})
+  }
+
+  hideModal(){
+    this.setState({isModalVisible: false, chosenDay: {}})
+  }
+
   render(){
-    const {newMood, days, isError} = this.state;
-    const {updateMood, addMood, clearMood} = this;
+    const {newMood, days, isError, isModalVisible, chosenDay} = this.state;
+    const {updateMood, addMood, clearMood, showModal, hideModal} = this;
     return (
       <div className="app">
         <header className="header">
@@ -66,7 +82,13 @@ class App extends React.Component {
           <div className="wrapper main__wrapper">
             <Switch>
               <Route exact path="/" render={ () => (
-                <Calendar days={days} />
+                <Calendar 
+                  days={days}
+                  isModalVisible={isModalVisible}
+                  showModal={showModal}
+                  chosenDay={chosenDay}
+                  hideModal={hideModal}
+                />
               )}/>
               <Route path="/editor" render={ () => (
                 <Editor
