@@ -1,9 +1,10 @@
-#Megan M Edwards - Mood calendar
+# Megan M Edwards - Mood calendar
 
 Record how you feel every day with this handy calendar!
 
 
-##More info
+
+## More info
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
