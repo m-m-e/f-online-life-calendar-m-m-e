@@ -9,14 +9,14 @@
     box-sizing: border-box;
     background: $color-indigo;
     text-align: center;
-    color: $color-white;
     font-size: $font-m;
-  }
-}
 
-@media all and (min-width: 768px){
-  .calendar {
-    margin-left: 50px;
-    flex-grow: 1;
+    @media all and (min-width: 768px){
+      font-size: $font-xl;
+    }
+  }
+  .add__button a {
+    color: $color-white;
+    text-decoration: none;
   }
 }

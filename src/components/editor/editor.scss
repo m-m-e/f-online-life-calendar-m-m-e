@@ -16,6 +16,10 @@
     margin-bottom: 10px;
   }
 
+  .date__input {
+    height: 30px;
+  }
+
   .mood__options {
     margin-top: 0;
     list-style: none;
@@ -48,9 +52,10 @@
 
   .button {
     font-family: $font-main;
-    padding: 10px;
+    box-sizing: border-box;
+    padding: 10px 0;
     width: 100%;
-    margin: 10px;
+    margin: 10px 0;
     font-weight: bold;
 
     &:hover {
@@ -70,11 +75,22 @@
       color: $color-indigo;
     }
   }
-}
+  .button__link {
+    width: 100%;
+  }
 
-@media all and (min-width: 768px){
-  .editor {
-    margin-right: 50px;
-    flex-grow: 1;
+  @media all and (min-width: 768px){
+    font-size: $font-m;
+    .date__input {
+      margin-top: 10px;
+    }
+    
+    .button {
+    font-size: $font-m;
+    }
+
+    * a {
+    font-size: $font-m;
+    }
   }
 }

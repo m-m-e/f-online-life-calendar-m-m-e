@@ -71,72 +71,35 @@ class Editor extends Component {
               </div>
           }
           <div className="actions">
-          {mood.date &&
-            mood.mood
-            ?
-              <Link to="/">
+            {mood.date &&
+              mood.mood
+              ?
+                <Link className="button__link" to="/">
+                  <button
+                    type="button"
+                    className="button button__save"
+                    onClick={addMood}>
+                      Save
+                  </button>
+                </Link>
+              :
                 <button
                   type="button"
                   className="button button__save"
                   onClick={addMood}>
                     Save
                 </button>
-              </Link>
-            :
-              <button
-                type="button"
-                className="button button__save"
-                onClick={addMood}>
-                  Save
-              </button>
-          }
-          <button
-            type="button"
-            className="button button__cancel"
-            onClick={clearMood}>
-              <Link to="/">
-                Cancel
-              </Link>
-          </button>
-        </div>
-          {/* {mood.date &&
-            mood.mood
-            ?
-            <div className="actions">
-              <Link to="/">
-                <button
-                  type="button"
-                  className="button button__save"
-                  onClick={addMood}>
-                      Save
-                </button>
-              </Link>
-              <button
-                type="button"
-                className="button button__cancel"
-                onClick={clearMood}>
-                  <Link to="/">
-                    Cancel
-                  </Link>
-              </button>
-            </div>
-            :
-            <div className="actions">
-              <button
-                type="button"
-                className="button button__save"
-                onClick={addMood}>
-                  Save
-              </button>
+            }
+            <Link className="button__link" to="/">
               <button
                 type="button"
                 className="button button__cancel"
                 onClick={clearMood}>
                   Cancel
               </button>
-            </div>
-          } */}
-          {error && <p className="error">Please fill in the date and your mood!</p>}
+            </Link>
+          </div>
+        {error && <p className="error">Please fill in the date and your mood!</p>}
         </form>
       </section>
     );

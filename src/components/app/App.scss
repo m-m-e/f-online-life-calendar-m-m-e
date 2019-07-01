@@ -1,6 +1,7 @@
 @import '../../stylesheets/_variables.scss';
 
 .app {
+  min-height: 100vh;
   font-family: $font-main;
   margin: 0;
   box-sizing: border-box;
@@ -15,14 +16,27 @@
     text-align: center;
   }
 
+  .main {
+    flex-grow: 1;
+  }
+
   .footer {
     text-align: center;
   }
 
+  @media all and (min-width: 768px){
+    .wrapper {
+      margin: auto auto;
+      max-width: 700px;
+    }
+  }
+  
+  @media all and (min-width: 1024px){
+    .app {
+      align-items: center;
+    }
+    .wrapper {
+      margin: auto;
+    }
+  }
 }
-// @media all and (min-width: 768px){
-//  .main__wrapper {
-//   display: flex;
-//   justify-content: space-between;
-//  }
-// }
