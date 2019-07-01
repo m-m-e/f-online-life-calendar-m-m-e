@@ -54,22 +54,53 @@ class Editor extends Component {
               </li>
             </ul>
           </div>
-          {mood && mood.mood === 'good' &&
-            <div className="form__container">
-              <label htmlFor="message" className="form__label">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="2"
-                cols="33"
-                placeholder="Why was it a good day?"
-                onChange={updateMood}
-                className="input message__input"
-                value={mood.message}
-              />
-            </div>
+          {mood && 
+            mood.mood === 'good' &&
+              <div className="form__container">
+                <label htmlFor="message" className="form__label">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="2"
+                  cols="33"
+                  placeholder="Why was it a good day?"
+                  onChange={updateMood}
+                  className="input message__input"
+                  value={mood.message}
+                />
+              </div>
           }
-          {mood.date && mood.mood
+          <div className="actions">
+          {mood.date &&
+            mood.mood
+            ?
+              <Link to="/">
+                <button
+                  type="button"
+                  className="button button__save"
+                  onClick={addMood}>
+                    Save
+                </button>
+              </Link>
+            :
+              <button
+                type="button"
+                className="button button__save"
+                onClick={addMood}>
+                  Save
+              </button>
+          }
+          <button
+            type="button"
+            className="button button__cancel"
+            onClick={clearMood}>
+              <Link to="/">
+                Cancel
+              </Link>
+          </button>
+        </div>
+          {/* {mood.date &&
+            mood.mood
             ?
             <div className="actions">
               <Link to="/">
@@ -104,7 +135,7 @@ class Editor extends Component {
                   Cancel
               </button>
             </div>
-          }
+          } */}
           {error && <p className="error">Please fill in the date and your mood!</p>}
         </form>
       </section>
