@@ -2,10 +2,11 @@ import React from 'react';
 import './day.scss';
 
 const Day = (props) => {
-  const {day} = props;
+  const {day, showModal} = props;
   return (
     <li className="day">
       <div
+      onClick={showModal}
       title={day.date}
       className={
         day.mood === 'good'
